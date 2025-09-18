@@ -1,4 +1,5 @@
 com\example\taskmanager\controller\TaskController.class
+com\example\taskmanager\config\CorsConfig.class
 com\example\taskmanager\entity\Task$Status.class
 com\example\taskmanager\service\TaskService.class
 com\example\taskmanager\TaskManagerApplication.class

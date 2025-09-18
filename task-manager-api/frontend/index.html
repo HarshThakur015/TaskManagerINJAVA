@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">
+                <i class="fas fa-tasks"></i>
+                Task Manager
+            </h1>
+            <p class="header-subtitle">Stay organized and productive</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Add Task Form -->
+            <section class="add-task-section">
+                <div class="card">
+                    <h2 class="section-title">
+                        <i class="fas fa-plus-circle"></i>
+                        Add New Task
+                    </h2>
+                    <form id="addTaskForm" class="task-form">
+                        <div class="form-group">
+                            <label for="taskTitle" class="form-label">Task Title *</label>
+                            <input 
+                                type="text" 
+                                id="taskTitle" 
+                                name="title" 
+                                class="form-input" 
+                                placeholder="Enter task title..."
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="taskDescription" class="form-label">Description</label>
+                            <textarea 
+                                id="taskDescription" 
+                                name="description" 
+                                class="form-textarea" 
+                                placeholder="Enter task description (optional)..."
+                                rows="3"
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Task
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Task List Section -->
+            <section class="task-list-section">
+                <div class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-list"></i>
+                            Your Tasks
+                        </h2>
+                        <div class="task-stats">
+                            <span id="taskCount" class="task-count">0 tasks</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Loading indicator -->
+                    <div id="loadingIndicator" class="loading-indicator">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Loading tasks...
+                    </div>
+
+                    <!-- Task List Container -->
+                    <div id="taskList" class="task-list">
+                        <!-- Tasks will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Empty state -->
+                    <div id="emptyState" class="empty-state" style="display: none;">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No tasks yet</h3>
+                        <p>Add your first task above to get started!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Edit Task Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Task</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editTaskForm" class="task-form">
+                <input type="hidden" id="editTaskId">
+                <div class="form-group">
+                    <label for="editTaskTitle" class="form-label">Task Title *</label>
+                    <input 
+                        type="text" 
+                        id="editTaskTitle" 
+                        name="title" 
+                        class="form-input" 
+                        required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="editTaskDescription" class="form-label">Description</label>
+                    <textarea 
+                        id="editTaskDescription" 
+                        name="description" 
+                        class="form-textarea" 
+                        rows="3"
+                    ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editTaskStatus" class="form-label">Status</label>
+                    <select id="editTaskStatus" name="status" class="form-select">
+                        <option value="PENDING">Pending</option>
+                        <option value="COMPLETED">Completed</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Action</h3>
+                <button class="modal-close" id="closeConfirmModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to perform this action?</p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelConfirm">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmAction">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
